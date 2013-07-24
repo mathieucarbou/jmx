@@ -21,10 +21,10 @@ import javax.management.ReflectionException;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public interface JmxOperation<T> {
+public interface JmxOperation {
     Signature getSignature();
 
     MBeanOperationInfo getMetadata();
 
-    T invoke(Object managedResource, Object... params) throws ReflectionException;
+    Object invoke(Object managedResource, Object... params) throws ReflectionException;
 }

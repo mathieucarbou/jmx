@@ -23,12 +23,12 @@ import javax.management.modelmbean.ModelMBeanAttributeInfo;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public final class MBeanProperty<T> implements JmxAttribute<T> {
+public final class MBeanProperty implements JmxAttribute {
 
-    private final BeanProperty<T> beanProperty;
+    private final BeanProperty beanProperty;
     private final ModelMBeanAttributeInfo attributeInfo;
 
-    public MBeanProperty(BeanProperty<T> beanProperty, String exportName, String description, Access access) {
+    public MBeanProperty(BeanProperty beanProperty, String exportName, String description, Access access) {
         this.beanProperty = beanProperty;
         try {
             this.attributeInfo = new ModelMBeanAttributeInfo(
@@ -52,7 +52,7 @@ public final class MBeanProperty<T> implements JmxAttribute<T> {
     }
 
     @Override
-    public T get(Object managedResource) throws ReflectionException {
+    public Object get(Object managedResource) throws ReflectionException {
         if (!getMetadata().isReadable())
             throw new ReflectionException(new IllegalAccessException("Property not readable: " + this), "Property not readable: " + this);
         try {
@@ -63,7 +63,7 @@ public final class MBeanProperty<T> implements JmxAttribute<T> {
     }
 
     @Override
-    public void set(Object managedResource, T value) throws InvalidAttributeValueException, ReflectionException {
+    public void set(Object managedResource, Object value) throws InvalidAttributeValueException, ReflectionException {
         if (!getMetadata().isWritable())
             throw new ReflectionException(new IllegalAccessException("Property not writable: " + this), "Property not writable: " + this);
         if (!ClassUtils.isAssignableValue(beanProperty.getType(), value))

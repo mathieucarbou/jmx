@@ -45,7 +45,7 @@ public final class CustomMetadataAssembler extends ReflectionMetadataAssemblerSk
     }
 
     @Override
-    public boolean canInclude(Class<?> managedClass, BeanProperty<?> property) {
+    public boolean canInclude(Class<?> managedClass, BeanProperty property) {
         return properties.contains(property);
     }
 
@@ -77,13 +77,13 @@ public final class CustomMetadataAssembler extends ReflectionMetadataAssemblerSk
     }
 
     public CustomMetadataAssembler addProperty(Class<?> clazz, String name, Class<?> type) {
-        BeanProperty<?> property = BeanProperty.findProperty(clazz, name, type);
+        BeanProperty property = BeanProperty.findProperty(clazz, name, type);
         if (property == null)
             throw new IllegalArgumentException("Property '" + name + "' of type " + type + " not found in class hierarchy " + clazz.getName());
         return addProperty(property);
     }
 
-    public CustomMetadataAssembler addProperty(BeanProperty<?> property) {
+    public CustomMetadataAssembler addProperty(BeanProperty property) {
         if (property == null) throw new NullPointerException("Property cannot be null");
         properties.add(property);
         return this;

@@ -52,7 +52,7 @@ public class JmxModule extends AbstractModule {
 
     @Provides
     @Singleton
-    JmxExporter jmxExporter(MBeanServer server) {
+    protected JmxExporter jmxExporter(MBeanServer server) {
         MycilaJmxExporter exporter = new MycilaJmxExporter(server);
         exporter.setExportBehavior(ExportBehavior.FAIL_ON_EXISTING);
         exporter.setEnsureUnique(false);
@@ -61,7 +61,7 @@ public class JmxModule extends AbstractModule {
 
     @Provides
     @Singleton
-    MBeanServer mBeanServer() {
+    protected MBeanServer mBeanServer() {
         return ManagementFactory.getPlatformMBeanServer();
     }
 }

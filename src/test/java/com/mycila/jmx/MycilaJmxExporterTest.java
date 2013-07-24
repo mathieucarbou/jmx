@@ -49,7 +49,7 @@ public final class MycilaJmxExporterTest {
             public void run() throws Throwable {
                 exporter.register(new Object(), on);
             }
-        }, fire(JmxExportException.class, "Unable to register MBean [com.mycila.jmx.export.ContextualDynamicMBean] with object name [a:type=b]"));
+        }, fire(JmxExportException.class, "Unable to register MBean [com.mycila.jmx.ContextualDynamicMBean] with object name [a:type=b]"));
 
         exporter.setExportBehavior(ExportBehavior.SKIP_EXISTING);
         exporter.register(new Object() {
@@ -106,7 +106,7 @@ public final class MycilaJmxExporterTest {
                     }
                 });
             }
-        }, fire(JmxExportException.class, "Unable to generate ObjectName for MBean [com.mycila.jmx.export.MycilaJmxExporterTest$5$1]"));
+        }, fire(JmxExportException.class, "Unable to generate ObjectName for MBean [com.mycila.jmx.MycilaJmxExporterTest$5$1]"));
     }
 
 }

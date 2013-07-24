@@ -24,7 +24,7 @@ import java.lang.reflect.Method;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public final class MBeanOperation<T> implements JmxOperation<T> {
+public final class MBeanOperation implements JmxOperation {
 
     private final Signature signature;
     private final Method operation;
@@ -52,9 +52,9 @@ public final class MBeanOperation<T> implements JmxOperation<T> {
     }
 
     @Override
-    public T invoke(Object managedResource, Object... params) throws ReflectionException {
+    public Object invoke(Object managedResource, Object... params) throws ReflectionException {
         try {
-            return (T) operation.invoke(managedResource, params);
+            return operation.invoke(managedResource, params);
         } catch (Throwable e) {
             throw JmxUtils.rethrow(e);
         }

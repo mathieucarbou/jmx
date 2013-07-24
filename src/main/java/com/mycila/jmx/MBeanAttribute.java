@@ -23,7 +23,7 @@ import java.lang.reflect.Field;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public final class MBeanAttribute<T> implements JmxAttribute<T> {
+public final class MBeanAttribute implements JmxAttribute {
 
     private final Field field;
     private final ModelMBeanAttributeInfo attributeInfo;
@@ -48,20 +48,20 @@ public final class MBeanAttribute<T> implements JmxAttribute<T> {
     }
 
     @Override
-    public T get(Object managedResource) throws ReflectionException {
+    public Object get(Object managedResource) throws ReflectionException {
         if (!getMetadata().isReadable())
             throw new ReflectionException(new IllegalAccessException("Attribute not readable: " + this), "Attribute not readable: " + this);
         if (!field.isAccessible())
             field.setAccessible(true);
         try {
-            return (T) field.get(managedResource);
+            return field.get(managedResource);
         } catch (Exception e) {
             throw JmxUtils.rethrow(e);
         }
     }
 
     @Override
-    public void set(Object managedResource, T value) throws InvalidAttributeValueException, ReflectionException {
+    public void set(Object managedResource, Object value) throws InvalidAttributeValueException, ReflectionException {
         if (!getMetadata().isWritable())
             throw new ReflectionException(new IllegalAccessException("Attribute not writable: " + this), "Attribute not writable: " + this);
         if (!field.isAccessible())

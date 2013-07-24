@@ -129,12 +129,12 @@ public class AnnotationMetadataAssembler extends ReflectionMetadataAssemblerSkel
     // PROPERTIES
 
     @Override
-    public boolean canInclude(Class<?> managedClass, BeanProperty<?> property) {
+    public boolean canInclude(Class<?> managedClass, BeanProperty property) {
         return isAnnotated(managedClass) && property.isAnnotationPresent(JmxProperty.class);
     }
 
     @Override
-    protected String getPropertyExportName(Class<?> managedClass, BeanProperty<?> property) {
+    protected String getPropertyExportName(Class<?> managedClass, BeanProperty property) {
         String name = property.getAnnotation(JmxProperty.class).name();
         if (name.length() == 0)
             name = property.getAnnotation(JmxProperty.class).value();
@@ -142,17 +142,17 @@ public class AnnotationMetadataAssembler extends ReflectionMetadataAssemblerSkel
     }
 
     @Override
-    protected String getPropertyDescription(Class<?> managedClass, BeanProperty<?> property) {
+    protected String getPropertyDescription(Class<?> managedClass, BeanProperty property) {
         return property.getAnnotation(JmxProperty.class).description();
     }
 
     @Override
-    protected Access getPropertyAccess(Class<?> managedClass, BeanProperty<?> property) {
+    protected Access getPropertyAccess(Class<?> managedClass, BeanProperty property) {
         return property.getAnnotation(JmxProperty.class).access();
     }
 
     @Override
-    protected void populatePropertyDescriptor(Class<?> managedClass, BeanProperty<?> property, Descriptor desc) {
+    protected void populatePropertyDescriptor(Class<?> managedClass, BeanProperty property, Descriptor desc) {
         super.populatePropertyDescriptor(managedClass, property, desc);
         JmxMetric metric = property.getAnnotation(JmxMetric.class);
         if (metric != null) fillMetric(metric, desc);

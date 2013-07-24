@@ -32,10 +32,10 @@ import java.util.Map;
 public final class MBeanMetadata implements JmxMetadata {
 
     private final MBeanInfo mBeanInfo;
-    private final Map<String, JmxAttribute<?>> attributes = new HashMap<String, JmxAttribute<?>>();
-    private final Map<Signature, JmxOperation<?>> operations = new HashMap<Signature, JmxOperation<?>>();
+    private final Map<String, JmxAttribute> attributes = new HashMap<String, JmxAttribute>();
+    private final Map<Signature, JmxOperation> operations;
 
-    public MBeanMetadata(String className, String description, Collection<JmxAttribute<?>> attributes, Collection<JmxOperation<?>> operations) {
+    public MBeanMetadata(String className, String description, Collection<JmxAttribute> attributes, Collection<JmxOperation> operations) {
         List<MBeanAttributeInfo> attrs = new ArrayList<MBeanAttributeInfo>(attributes.size());
         for (JmxAttribute attribute : attributes) {
             if (this.attributes.put(attribute.getName(), attribute) != null)
@@ -43,6 +43,7 @@ public final class MBeanMetadata implements JmxMetadata {
             attrs.add(attribute.getMetadata());
         }
         List<MBeanOperationInfo> ops = new ArrayList<MBeanOperationInfo>(attributes.size());
+        this.operations = new HashMap<Signature, JmxOperation>();
         for (JmxOperation operation : operations) {
             if (this.operations.put(operation.getSignature(), operation) != null)
                 throw new IllegalArgumentException("Duplicate operation found: " + operation.getSignature());
@@ -59,14 +60,14 @@ public final class MBeanMetadata implements JmxMetadata {
     }
 
     @Override
-    public JmxAttribute<?> getAttribute(String attribute) throws AttributeNotFoundException {
+    public JmxAttribute getAttribute(String attribute) throws AttributeNotFoundException {
         JmxAttribute att = attributes.get(attribute);
         if (att == null) throw new AttributeNotFoundException(attribute);
         return att;
     }
 
     @Override
-    public JmxOperation<?> getOperation(String operation, Class<?>... paramTypes) throws OperationNotFoundException {
+    public JmxOperation getOperation(String operation, Class<?>... paramTypes) throws OperationNotFoundException {
         Signature signature = new Signature(operation, paramTypes);
         JmxOperation op = operations.get(signature);
         if (op == null) throw new OperationNotFoundException(signature.toString());

@@ -35,7 +35,7 @@ public class PublicMetadataAssembler extends ReflectionMetadataAssemblerSkeleton
     }
 
     @Override
-    public boolean canInclude(Class<?> managedClass, BeanProperty<?> property) {
+    public boolean canInclude(Class<?> managedClass, BeanProperty property) {
         if (property.isReadable() &&
             (!exposeObjectElements && property.getReadMethod().getDeclaringClass().equals(Object.class)
                 || Modifier.isStatic(property.getReadMethod().getModifiers())

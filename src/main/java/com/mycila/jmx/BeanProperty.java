@@ -23,10 +23,10 @@ import java.lang.reflect.Method;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public final class BeanProperty<T> implements AnnotatedElement {
+public final class BeanProperty implements AnnotatedElement {
     private Method readMethod;
     private Method writeMethod;
-    private final Class<T> type;
+    private final Class<?> type;
     private final String name;
 
     private BeanProperty(String name, Method readMethod, Method writeMethod) {
@@ -35,7 +35,8 @@ public final class BeanProperty<T> implements AnnotatedElement {
         if (readMethod != null && writeMethod != null && !readMethod.getReturnType().equals(writeMethod.getParameterTypes()[0]))
             throw new IllegalArgumentException("return type differs: " + readMethod.getReturnType() + " and " + writeMethod.getParameterTypes()[0]);
         this.name = name;
-        this.type = (Class<T>) (readMethod != null ? readMethod.getReturnType() : writeMethod.getParameterTypes()[0]);
+        //noinspection unchecked
+        this.type = readMethod != null ? readMethod.getReturnType() : writeMethod.getParameterTypes()[0];
         this.readMethod = readMethod;
         this.writeMethod = writeMethod;
     }
@@ -48,7 +49,7 @@ public final class BeanProperty<T> implements AnnotatedElement {
         return writeMethod;
     }
 
-    public Class<T> getType() {
+    public Class<?> getType() {
         return type;
     }
 
@@ -72,7 +73,7 @@ public final class BeanProperty<T> implements AnnotatedElement {
         writeMethod = null;
     }
 
-    public T get(Object o) throws Throwable {
+    public Object get(Object o) throws Throwable {
         if (!isReadable())
             throw new IllegalStateException("Property not readable: " + this);
         if (!getReadMethod().isAccessible())
@@ -81,13 +82,13 @@ public final class BeanProperty<T> implements AnnotatedElement {
             Object res = getReadMethod().invoke(o);
             if (!ClassUtils.isAssignableValue(getType(), res))
                 throw new IllegalArgumentException("Invalid property: got type " + res.getClass().getName() + " but expect " + getType().getName());
-            return (T) res;
+            return type.cast(res);
         } catch (InvocationTargetException e) {
             throw e.getTargetException();
         }
     }
 
-    public void set(Object o, T value) throws Throwable {
+    public void set(Object o, Object value) throws Throwable {
         if (!isWritable())
             throw new IllegalStateException("Property not writable: " + this);
         if (!getWriteMethod().isAccessible())
@@ -155,7 +156,7 @@ public final class BeanProperty<T> implements AnnotatedElement {
         return result;
     }
 
-    public static BeanProperty<?> findProperty(Class<?> clazz, Method method) {
+    public static BeanProperty findProperty(Class<?> clazz, Method method) {
         if (ReflectionUtils.isIsMethod(method))
             return findProperty(clazz, StringUtils.uncapitalize(method.getName().substring(2)), method.getReturnType());
         if (ReflectionUtils.isGetMethod(method))
@@ -165,11 +166,11 @@ public final class BeanProperty<T> implements AnnotatedElement {
         return null;
     }
 
-    public static BeanProperty<?> findProperty(Class<?> clazz, String property) {
+    public static BeanProperty findProperty(Class<?> clazz, String property) {
         return findProperty(clazz, property, null);
     }
 
-    public static <T> BeanProperty<T> findProperty(Class<?> clazz, String property, Class<T> type) {
+    public static BeanProperty findProperty(Class<?> clazz, String property, Class<?> type) {
         String name = StringUtils.capitalize(property);
         Method is = ReflectionUtils.findMethod(clazz, "is" + name, type, new Class<?>[0]);
         Method get = ReflectionUtils.findMethod(clazz, "get" + name, type, new Class<?>[0]);
@@ -178,7 +179,7 @@ public final class BeanProperty<T> implements AnnotatedElement {
         if (setter == null && getter == null
             || setter != null && getter != null && !setter.getParameterTypes()[0].equals(getter.getReturnType()))
             return null;
-        return new BeanProperty<T>(property, getter, setter);
+        return new BeanProperty(property, getter, setter);
     }
 
 }

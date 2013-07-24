@@ -41,8 +41,8 @@ public abstract class MetadataAssemblerSkeleton implements JmxMetadataAssembler 
         return managedClass.getName();
     }
 
-    protected Collection<JmxAttribute<?>> getMBeanAttributes(Class<?> managedClass) {
-        List<JmxAttribute<?>> jmxAttributes = new LinkedList<JmxAttribute<?>>();
+    protected Collection<JmxAttribute> getMBeanAttributes(Class<?> managedClass) {
+        List<JmxAttribute> jmxAttributes = new LinkedList<JmxAttribute>();
         for (BeanProperty property : getProperties(managedClass))
             jmxAttributes.add(buildProperty(managedClass, property));
         for (Field field : getAttributes(managedClass))
@@ -50,8 +50,8 @@ public abstract class MetadataAssemblerSkeleton implements JmxMetadataAssembler 
         return jmxAttributes;
     }
 
-    protected JmxAttribute<?> buildAttribute(Class<?> managedClass, Field field) {
-        MBeanAttribute<?> jmxAttribute = new MBeanAttribute(
+    protected JmxAttribute buildAttribute(Class<?> managedClass, Field field) {
+        MBeanAttribute jmxAttribute = new MBeanAttribute(
             field,
             getAttributeExportName(managedClass, field),
             getAttributeDescription(managedClass, field),
@@ -62,8 +62,8 @@ public abstract class MetadataAssemblerSkeleton implements JmxMetadataAssembler 
         return jmxAttribute;
     }
 
-    protected JmxAttribute<?> buildProperty(Class<?> managedClass, BeanProperty<?> property) {
-        MBeanProperty<?> jmxAttribute = new MBeanProperty(
+    protected JmxAttribute buildProperty(Class<?> managedClass, BeanProperty property) {
+        MBeanProperty jmxAttribute = new MBeanProperty(
             property,
             getPropertyExportName(managedClass, property),
             getPropertyDescription(managedClass, property),
@@ -74,15 +74,15 @@ public abstract class MetadataAssemblerSkeleton implements JmxMetadataAssembler 
         return jmxAttribute;
     }
 
-    protected Collection<JmxOperation<?>> getMBeanOperations(Class<?> managedClass) {
-        List<JmxOperation<?>> jmxOperations = new LinkedList<JmxOperation<?>>();
+    protected Collection<JmxOperation> getMBeanOperations(Class<?> managedClass) {
+        List<JmxOperation> jmxOperations = new LinkedList<JmxOperation>();
         for (Method method : getMethodOperations(managedClass))
             jmxOperations.add(buildOperation(managedClass, method));
         return jmxOperations;
     }
 
-    protected JmxOperation<?> buildOperation(Class<?> managedClass, Method operation) {
-        MBeanOperation<?> jmxOperation = new MBeanOperation(
+    protected JmxOperation buildOperation(Class<?> managedClass, Method operation) {
+        MBeanOperation jmxOperation = new MBeanOperation(
             operation,
             getOperationExportName(managedClass, operation),
             getOperationDescription(managedClass, operation),
@@ -118,17 +118,17 @@ public abstract class MetadataAssemblerSkeleton implements JmxMetadataAssembler 
 
     // properties
 
-    protected abstract Collection<BeanProperty<?>> getProperties(Class<?> managedClass);
+    protected abstract Collection<BeanProperty> getProperties(Class<?> managedClass);
 
-    protected String getPropertyExportName(Class<?> managedClass, BeanProperty<?> property) {
+    protected String getPropertyExportName(Class<?> managedClass, BeanProperty property) {
         return StringUtils.capitalize(property.getName());
     }
 
-    protected String getPropertyDescription(Class<?> managedClass, BeanProperty<?> property) {
+    protected String getPropertyDescription(Class<?> managedClass, BeanProperty property) {
         return "";
     }
 
-    protected Access getPropertyAccess(Class<?> managedClass, BeanProperty<?> property) {
+    protected Access getPropertyAccess(Class<?> managedClass, BeanProperty property) {
         if (property.isReadable() && property.isWritable())
             return Access.RW;
         if (property.isReadable() && !property.isWritable())
@@ -138,7 +138,7 @@ public abstract class MetadataAssemblerSkeleton implements JmxMetadataAssembler 
         return Access.NONE;
     }
 
-    protected void populatePropertyDescriptor(Class<?> managedClass, BeanProperty<?> property, Descriptor desc) {
+    protected void populatePropertyDescriptor(Class<?> managedClass, BeanProperty property, Descriptor desc) {
         JmxUtils.populateDeprecation(desc, property.getReadMethod());
         JmxUtils.populateDeprecation(desc, property.getWriteMethod());
         JmxUtils.populateEnable(desc, true);
@@ -185,8 +185,8 @@ public abstract class MetadataAssemblerSkeleton implements JmxMetadataAssembler 
         JmxUtils.populateVisibility(desc, 1);
         JmxUtils.populateRole(desc, Role.OPERATION);
         // verify if this is a property
-        Collection<BeanProperty<?>> beanProperties = getProperties(managedClass);
-        for (BeanProperty<?> beanProperty : beanProperties) {
+        Collection<BeanProperty> beanProperties = getProperties(managedClass);
+        for (BeanProperty beanProperty : beanProperties) {
             if (operation.equals(beanProperty.getReadMethod())) {
                 JmxUtils.populateRole(desc, Role.GETTER);
                 JmxUtils.populateVisibility(desc, 4);

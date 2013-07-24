@@ -44,16 +44,16 @@ public abstract class ReflectionMetadataAssemblerSkeleton extends MetadataAssemb
     protected abstract boolean canInclude(Class<?> managedClass, Field attribute);
 
     @Override
-    protected Collection<BeanProperty<?>> getProperties(Class<?> managedClass) {
-        Map<String, BeanProperty<?>> properties = new HashMap<String, BeanProperty<?>>();
-        for (BeanProperty<?> prop : BeanUtils.getProperties(managedClass))
+    protected Collection<BeanProperty> getProperties(Class<?> managedClass) {
+        Map<String, BeanProperty> properties = new HashMap<String, BeanProperty>();
+        for (BeanProperty prop : BeanUtils.getProperties(managedClass))
             if (!properties.containsKey(prop.getName())
                 && canInclude(managedClass, prop))
                 properties.put(prop.getName(), prop);
         return properties.values();
     }
 
-    protected abstract boolean canInclude(Class<?> managedClass, BeanProperty<?> property);
+    protected abstract boolean canInclude(Class<?> managedClass, BeanProperty property);
 
     @Override
     protected Collection<Method> getMethodOperations(Class<?> managedClass) {

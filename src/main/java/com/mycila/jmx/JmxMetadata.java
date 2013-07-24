@@ -24,7 +24,7 @@ import javax.management.MBeanInfo;
 public interface JmxMetadata {
     MBeanInfo getMBeanInfo();
 
-    JmxAttribute<?> getAttribute(String attribute) throws AttributeNotFoundException;
+    JmxAttribute getAttribute(String attribute) throws AttributeNotFoundException;
 
-    JmxOperation<?> getOperation(String operation, Class<?>... paramTypes) throws OperationNotFoundException;
+    JmxOperation getOperation(String operation, Class<?>... paramTypes) throws OperationNotFoundException;
 }
