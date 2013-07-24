@@ -11,7 +11,7 @@
 
     <groupId>com.mycila</groupId>
     <artifactId>mycila-jmx</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.rc1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>mycila-jmx</name>
