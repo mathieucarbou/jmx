@@ -33,7 +33,6 @@ public final class Assemblers {
     }
 
     public static JmxMetadataAssembler get(Class<?> mbeanClass) {
-        mbeanClass = AopUtils.getTargetClass(mbeanClass);
         JmxBean jmxBean = mbeanClass.getAnnotation(JmxBean.class);
         return jmxBean == null ? load(PublicMetadataAssembler.class) : load(jmxBean.assembler());
     }

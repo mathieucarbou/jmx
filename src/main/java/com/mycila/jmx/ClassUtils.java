@@ -94,9 +94,9 @@ final class ClassUtils {
 
         Set<Class<?>> primitiveTypes = new HashSet<>(16);
         primitiveTypes.addAll(primitiveWrapperTypeMap.values());
-        primitiveTypes.addAll(Arrays.asList(new Class<?>[]{
+        primitiveTypes.addAll(Arrays.asList(
             boolean[].class, byte[].class, char[].class, double[].class,
-            float[].class, int[].class, long[].class, short[].class}));
+            float[].class, int[].class, long[].class, short[].class));
         for (Class<?> primitiveType : primitiveTypes) {
             primitiveTypeNameMap.put(primitiveType.getName(), primitiveType);
         }

@@ -35,7 +35,6 @@ public final class BeanProperty implements AnnotatedElement {
         if (readMethod != null && writeMethod != null && !readMethod.getReturnType().equals(writeMethod.getParameterTypes()[0]))
             throw new IllegalArgumentException("return type differs: " + readMethod.getReturnType() + " and " + writeMethod.getParameterTypes()[0]);
         this.name = name;
-        //noinspection unchecked
         this.type = readMethod != null ? readMethod.getReturnType() : writeMethod.getParameterTypes()[0];
         this.readMethod = readMethod;
         this.writeMethod = writeMethod;
@@ -82,7 +81,7 @@ public final class BeanProperty implements AnnotatedElement {
             Object res = getReadMethod().invoke(o);
             if (!ClassUtils.isAssignableValue(getType(), res))
                 throw new IllegalArgumentException("Invalid property: got type " + res.getClass().getName() + " but expect " + getType().getName());
-            return type.cast(res);
+            return res;
         } catch (InvocationTargetException e) {
             throw e.getTargetException();
         }
