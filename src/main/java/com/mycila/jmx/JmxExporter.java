@@ -16,34 +16,20 @@
 
 package com.mycila.jmx;
 
-import com.mycila.jmx.annotation.JmxBean;
-import com.mycila.jmx.annotation.JmxField;
-import com.mycila.jmx.annotation.JmxMethod;
-import com.mycila.jmx.annotation.JmxParam;
-import com.mycila.jmx.annotation.JmxProperty;
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-@JmxBean("app:name=MyService")
-public final class MyService {
+public interface JmxExporter {
 
-    private String name;
+    MBeanServer getMBeanServer();
 
-    @JmxField
-    private int internalField = 10;
+    ObjectName register(Object managedResource) throws JmxExportException;
 
-    @JmxProperty
-    public String getName() {
-        return name;
-    }
+    void register(Object managedResource, ObjectName objectName) throws JmxExportException;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    void unregister(ObjectName objectName);
 
-    @JmxMethod(parameters = {@JmxParam(value = "number", description = "put a big number please !")})
-    void increment(int n) {
-        internalField += n;
-    }
 }

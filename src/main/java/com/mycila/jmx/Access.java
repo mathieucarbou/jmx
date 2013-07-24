@@ -16,34 +16,27 @@
 
 package com.mycila.jmx;
 
-import com.mycila.jmx.annotation.JmxBean;
-import com.mycila.jmx.annotation.JmxField;
-import com.mycila.jmx.annotation.JmxMethod;
-import com.mycila.jmx.annotation.JmxParam;
-import com.mycila.jmx.annotation.JmxProperty;
-
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-@JmxBean("app:name=MyService")
-public final class MyService {
+public enum Access {
+    /**
+     * Read-only
+     */
+    RO,
 
-    private String name;
+    /**
+     * Read and Write
+     */
+    RW,
 
-    @JmxField
-    private int internalField = 10;
+    /**
+     * Write Only
+     */
+    WO,
 
-    @JmxProperty
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JmxMethod(parameters = {@JmxParam(value = "number", description = "put a big number please !")})
-    void increment(int n) {
-        internalField += n;
-    }
+    /**
+     * No access
+     */
+    NONE
 }

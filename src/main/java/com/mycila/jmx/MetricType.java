@@ -16,34 +16,22 @@
 
 package com.mycila.jmx;
 
-import com.mycila.jmx.annotation.JmxBean;
-import com.mycila.jmx.annotation.JmxField;
-import com.mycila.jmx.annotation.JmxMethod;
-import com.mycila.jmx.annotation.JmxParam;
-import com.mycila.jmx.annotation.JmxProperty;
-
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-@JmxBean("app:name=MyService")
-public final class MyService {
+public enum MetricType {
+    /**
+     * The measurement values may go up or down over time
+     */
+    GAUGE,
 
-    private String name;
+    /**
+     * The measurement values will always increase
+     */
+    COUNTER;
 
-    @JmxField
-    private int internalField = 10;
-
-    @JmxProperty
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JmxMethod(parameters = {@JmxParam(value = "number", description = "put a big number please !")})
-    void increment(int n) {
-        internalField += n;
+    @Override
+    public String toString() {
+        return name().toLowerCase();
     }
 }

@@ -14,36 +14,30 @@
  * limitations under the License.
  */
 
-package com.mycila.jmx;
+package com.mycila.jmx.annotation;
 
-import com.mycila.jmx.annotation.JmxBean;
-import com.mycila.jmx.annotation.JmxField;
-import com.mycila.jmx.annotation.JmxMethod;
-import com.mycila.jmx.annotation.JmxParam;
-import com.mycila.jmx.annotation.JmxProperty;
+import com.mycila.jmx.MetricType;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-@JmxBean("app:name=MyService")
-public final class MyService {
+@Target({ElementType.FIELD, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface JmxMetric {
 
-    private String name;
+    MetricType type() default MetricType.GAUGE;
 
-    @JmxField
-    private int internalField = 10;
+    String category() default "";
 
-    @JmxProperty
-    public String getName() {
-        return name;
-    }
+    String unit() default "";
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JmxMethod(parameters = {@JmxParam(value = "number", description = "put a big number please !")})
-    void increment(int n) {
-        internalField += n;
-    }
 }

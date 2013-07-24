@@ -16,9 +16,6 @@
 
 package com.mycila.jmx;
 
-import com.mycila.jmx.export.JmxExporter;
-import com.mycila.jmx.export.MycilaJmxExporter;
-import com.mycila.jmx.export.PublicMetadataAssembler;
 import mx4j.tools.adaptor.http.HttpAdaptor;
 import mx4j.tools.adaptor.http.XSLTProcessor;
 

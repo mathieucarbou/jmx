@@ -53,8 +53,7 @@ public class JmxServerFactory {
         if (agent == null || agent.length() == 0)
             try {
                 return ManagementFactory.getPlatformMBeanServer();
-            }
-            catch (SecurityException ex) {
+            } catch (SecurityException ex) {
                 throw new JmxServerException("No specific MBeanServer found, and not allowed to obtain the Java platform MBeanServer", ex);
             }
         throw new JmxServerException("Unable to locate an MBeanServer instance" + (agent != null ? " with agent id [" + agent + "]" : ""));

@@ -16,34 +16,30 @@
 
 package com.mycila.jmx;
 
-import com.mycila.jmx.annotation.JmxBean;
-import com.mycila.jmx.annotation.JmxField;
-import com.mycila.jmx.annotation.JmxMethod;
-import com.mycila.jmx.annotation.JmxParam;
-import com.mycila.jmx.annotation.JmxProperty;
+import com.google.inject.Binder;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.name.Names;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-@JmxBean("app:name=MyService")
-public final class MyService {
+@RunWith(JUnit4.class)
+public final class GuiceTestTest {
 
-    private String name;
-
-    @JmxField
-    private int internalField = 10;
-
-    @JmxProperty
-    public String getName() {
-        return name;
+    @Test
+    public void test() throws Exception {
+        Injector injector = Guice.createInjector(new Module() {
+            @Override
+            public void configure(Binder binder) {
+                binder.bind(JmxExporter.class).annotatedWith(Names.named("one")).to(MycilaJmxExporter.class);
+                MycilaJmx.exportJmxBeans(binder);
+            }
+        });
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JmxMethod(parameters = {@JmxParam(value = "number", description = "put a big number please !")})
-    void increment(int n) {
-        internalField += n;
-    }
 }
