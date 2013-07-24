@@ -1,0 +1,287 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.mycila</groupId>
+        <artifactId>mycila-pom</artifactId>
+        <version>1</version>
+        <relativePath>../pom</relativePath>
+    </parent>
+
+    <groupId>com.mycila</groupId>
+    <artifactId>mycila-jmx</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>mycila-jmx</name>
+    <url>http://code.mycila.com/</url>
+    <inceptionYear>2010</inceptionYear>
+
+    <!--
+        Properties
+    -->
+
+    <properties>
+        <jdk.version>1.6</jdk.version>
+    </properties>
+
+    <!--
+        Versionning system
+    -->
+
+    <scm>
+        <connection>scm:svn:https://mycila.googlecode.com/svn/mycila-jmx/trunk</connection>
+        <developerConnection>scm:svn:https://mycila.googlecode.com/svn/mycila-jmx/trunk</developerConnection>
+        <url>http://mycila.googlecode.com/svn/mycila-jmx/trunk</url>
+    </scm>
+
+    <!--
+         Project settings
+     -->
+
+    <organization>
+        <name>Mathieu Carbou</name>
+        <url>http://mathieu.carbou.free.fr/</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>mathieu.carbou</id>
+            <name>Mathieu Carbou</name>
+            <email>mathieu.carbou@gmail.com</email>
+            <organization>Mathieu Carbou</organization>
+            <organizationUrl>http://mathieu.carbou.free.fr/</organizationUrl>
+            <timezone>-5</timezone>
+            <roles>
+                <role>project administrator</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>Google Code</system>
+        <url>http://code.google.com/p/mycila/issues/list</url>
+    </issueManagement>
+
+    <ciManagement/>
+
+    <mailingLists>
+        <mailingList>
+            <name>mycila</name>
+            <subscribe>mycila-subscribe@googlegroups.com</subscribe>
+            <unsubscribe>mycila-unsubscribe@googlegroups.com</unsubscribe>
+            <archive>http://groups.google.com/group/mycila/</archive>
+        </mailingList>
+    </mailingLists>
+
+    <!--
+        Distributions
+    -->
+
+    <distributionManagement>
+        <repository>
+            <id>mc-release</id>
+            <name>Alternate Maven repository of releases</name>
+            <url>dav:https://mc-repo.googlecode.com/svn/maven2/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>mc-snapshot</id>
+            <name>Alternate Maven repository of snapshots</name>
+            <url>dav:https://mc-repo.googlecode.com/svn/maven2/snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+        <site>
+            <id>xmltool-website</id>
+            <name>xmltool website</name>
+            <url>file://${basedir}/target/dist/site</url>
+        </site>
+    </distributionManagement>
+
+    <!--
+        BUILD
+    -->
+
+    <prerequisites>
+        <maven>2.0.9</maven>
+    </prerequisites>
+
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav</artifactId>
+                <version>1.0-beta-2</version>
+            </extension>
+        </extensions>
+        <plugins>
+            <!-- for maven plugins -->
+            <plugin>
+                <artifactId>maven-plugin-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>.clover</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>test-output</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <!-- IDE descriptors -->
+            <plugin>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>false</downloadJavadocs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-idea-plugin</artifactId>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>false</downloadJavadocs>
+                </configuration>
+            </plugin>
+            <!-- compilation -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+            <!-- packaging -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-remote-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <resourceBundles>
+                                <resourceBundle>org.apache:apache-jar-resource-bundle:1.3</resourceBundle>
+                            </resourceBundles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>${basedir}/src/main/assembly/project.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attached</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- releasing -->
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <updateReleaseInfo>true</updateReleaseInfo>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.5.0</version>
+                <configuration>
+                    <header>${basedir}/src/main/etc/header.txt</header>
+                    <failIfMissing>true</failIfMissing>
+                    <properties>
+                        <owner>Mathieu Carbou</owner>
+                        <year>${project.inceptionYear}</year>
+                        <email>mathieu.carbou@gmail.com</email>
+                    </properties>
+                    <excludes>
+                        <exclude>LICENSE.txt</exclude>
+                        <exclude>src/test/resources/**</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--
+         LIBS
+    -->
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>2.0</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>mx4j</groupId>
+            <artifactId>mx4j-tools</artifactId>
+            <version>3.0.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
