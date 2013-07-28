@@ -18,7 +18,6 @@ __Issues:__ https://github.com/mycila/jmx/issues
 
 <img width="100px" src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTMvMDQvMTIvMTEvNDAvMzcvMTgzL05leHVzX0ZlYXR1cmVfTWF0cml4X29zZ2lfbG9nby5wbmciXV0/Nexus-Feature-Matrix-osgi-logo.png" title="OSGI Compliant"></img>
 [![Build Status](https://travis-ci.org/mycila/jmx.png?branch=master)](https://travis-ci.org/mycila/jmx)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mycila/jmx/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/85294c815bb3ce46bd79f4cf8d9bb341 "githalytics.com")](http://githalytics.com/mycila/jmx)
 
 ## Maven Repository ##
