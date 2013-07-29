@@ -14,11 +14,9 @@
 
 This small project enables to export your classes easily through JMX.
 
-__Issues:__ https://github.com/mycila/jmx/issues
-
-<img width="100px" src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTMvMDQvMTIvMTEvNDAvMzcvMTgzL05leHVzX0ZlYXR1cmVfTWF0cml4X29zZ2lfbG9nby5wbmciXV0/Nexus-Feature-Matrix-osgi-logo.png" title="OSGI Compliant"></img>
-[![Build Status](https://travis-ci.org/mycila/jmx.png?branch=master)](https://travis-ci.org/mycila/jmx)
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/85294c815bb3ce46bd79f4cf8d9bb341 "githalytics.com")](http://githalytics.com/mycila/jmx)
+ - __Issues:__ https://github.com/mycila/jmx/issues
+ - __OSGI Compliant:__ <img width="100px" src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTMvMDQvMTIvMTEvNDAvMzcvMTgzL05leHVzX0ZlYXR1cmVfTWF0cml4X29zZ2lfbG9nby5wbmciXV0/Nexus-Feature-Matrix-osgi-logo.png" title="OSGI Compliant"></img>
+ - __Build Status:__ [![Build Status](https://travis-ci.org/mycila/jmx.png?branch=master)](https://travis-ci.org/mycila/jmx)
 
 ## Maven Repository ##
 
@@ -112,3 +110,5 @@ When using the service discovery feature of [Mycile Guice] (http://mycila.github
 
  - [VisualVM] (http://visualvm.java.net/): Connects to a Java process and manage exported JMX classes
  - [MX4J] (http://mx4j.sourceforge.net/): Web interface yo manage JMX beans
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/85294c815bb3ce46bd79f4cf8d9bb341 "githalytics.com")](http://githalytics.com/mycila/jmx)
