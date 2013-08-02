@@ -20,11 +20,11 @@ This small project enables to export your classes easily through JMX.
 
 ## Maven Repository ##
 
- - __Releases__ 
+ __Releases__
 
 Available in Maven Central Repository: http://repo1.maven.org/maven2/com/mycila/jmx/
 
- - __Snapshots__
+ __Snapshots__
  
 Available in OSS Repository:  https://oss.sonatype.org/content/repositories/snapshots/com/mycila/jmx/
 
@@ -35,6 +35,10 @@ __Maven dependency__
         <artifactId>mycila-jmx</artifactId>
         <version>X.Y.ga</version>
     </dependency>
+
+__Maven sites__
+
+ - [1.1.ga](http://mycila.github.io/jmx/reports/1.1.ga/index.html)
 
 ## Documentation ##
 
