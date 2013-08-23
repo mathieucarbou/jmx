@@ -115,4 +115,4 @@ When using the service discovery feature of [Mycile Guice] (http://mycila.github
  - [VisualVM] (http://visualvm.java.net/): Connects to a Java process and manage exported JMX classes
  - [MX4J] (http://mx4j.sourceforge.net/): Web interface yo manage JMX beans
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/85294c815bb3ce46bd79f4cf8d9bb341 "githalytics.com")](http://githalytics.com/mycila/jmx)
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/ccb8ae70363afb2c06e4582434ceb163 "githalytics.com")](http://githalytics.com/mycila/jmx)
