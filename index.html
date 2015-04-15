@@ -1,37 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta charset="UTF-8">
     <title>Mycila JMX by mycila</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
-    <div id="container">
-      <div class="inner">
+    <section class="page-header">
+      <h1 class="project-name">Mycila JMX</h1>
+      <h2 class="project-tagline">Easily expose your classes in JMX through annotations</h2>
+      <a href="https://github.com/mycila/jmx" class="btn">View on GitHub</a>
+      <a href="https://github.com/mycila/jmx/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/mycila/jmx/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-        <header>
-          <h1>Mycila JMX</h1>
-          <h2>Easily expose your classes in JMX through annotations</h2>
-        </header>
-
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/mycila/jmx/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/mycila/jmx/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/mycila/jmx" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <p><strong>Table of Contents</strong></p>
+    <section class="main-content">
+      <p><strong>Table of Contents</strong></p>
 
 <ul>
 <li>
@@ -53,8 +41,10 @@
 </li>
 </ul>
 </li>
-</ul><h1>
-<a name="mycila-jmx" class="anchor" href="#mycila-jmx"><span class="octicon octicon-link"></span></a>Mycila JMX</h1>
+</ul>
+
+<h1>
+<a id="mycila-jmx" class="anchor" href="#mycila-jmx" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mycila JMX</h1>
 
 <p>This small project enables to export your classes easily through JMX.</p>
 
@@ -68,8 +58,10 @@
 <li>
 <strong>Build Status:</strong> <a href="https://travis-ci.org/mycila/jmx"><img src="https://travis-ci.org/mycila/jmx.png?branch=master" alt="Build Status"></a>
 </li>
-</ul><h2>
-<a name="maven-repository" class="anchor" href="#maven-repository"><span class="octicon octicon-link"></span></a>Maven Repository</h2>
+</ul>
+
+<h2>
+<a id="maven-repository" class="anchor" href="#maven-repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>Maven Repository</h2>
 
 <p><strong>Releases</strong></p>
 
@@ -92,11 +84,13 @@
 
 <ul>
 <li><a href="http://mycila.github.io/jmx/reports/1.1.ga/index.html">1.1.ga</a></li>
-</ul><h2>
-<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
+</ul>
+
+<h2>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
 
 <h3>
-<a name="1-annotations" class="anchor" href="#1-annotations"><span class="octicon octicon-link"></span></a>1. Annotations</h3>
+<a id="1-annotations" class="anchor" href="#1-annotations" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Annotations</h3>
 
 <ul>
 <li>
@@ -109,13 +103,15 @@
 <code>@JmxField</code>: export a field to JMX and specify its access writes</li>
 <li>
 <code>@JmxMetric</code>: export a JMX metric, its name and unit (counter or gauge)</li>
-</ul><h3>
-<a name="2-dynamic-naming" class="anchor" href="#2-dynamic-naming"><span class="octicon octicon-link"></span></a>2. Dynamic naming</h3>
+</ul>
+
+<h3>
+<a id="2-dynamic-naming" class="anchor" href="#2-dynamic-naming" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Dynamic naming</h3>
 
 <p>A bean can implement the interface <code>JmxSelfNaming</code> to return the its <code>ObjectName</code></p>
 
 <h3>
-<a name="3-how-to-use" class="anchor" href="#3-how-to-use"><span class="octicon octicon-link"></span></a>3. How to use</h3>
+<a id="3-how-to-use" class="anchor" href="#3-how-to-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. How to use</h3>
 
 <p>Supposing you have annotated your class like this</p>
 
@@ -152,7 +148,7 @@ exporter.setEnsureUnique(true);
 </code></pre>
 
 <h3>
-<a name="4-jmxmetadataassembler" class="anchor" href="#4-jmxmetadataassembler"><span class="octicon octicon-link"></span></a>4. JmxMetadataAssembler</h3>
+<a id="4-jmxmetadataassembler" class="anchor" href="#4-jmxmetadataassembler" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. JmxMetadataAssembler</h3>
 
 <p><code>JmxMetadataAssembler</code> are implementations which describes the exportable members of a class and how to export them. Several implementation exist:</p>
 
@@ -167,7 +163,9 @@ exporter.setEnsureUnique(true);
 <code>CustomMetadataAssembler</code>: you can specify which members are exported. This class can be useful if you only need to export just some members and if you do not have access to the source code of the class to export</li>
 </ul>
 </li>
-</ul><p><strong>Example</strong></p>
+</ul>
+
+<p><strong>Example</strong></p>
 
 <pre><code>CustomMetadataAssembler assembler = new CustomMetadataAssembler()
     .addAttribute(MyClass.class, "myRWField")
@@ -178,27 +176,31 @@ exporter.setEnsureUnique(true);
 <p>You will be able to find other examples in the Unit Tests </p>
 
 <h3>
-<a name="5-mycile-guice-integration" class="anchor" href="#5-mycile-guice-integration"><span class="octicon octicon-link"></span></a>5. Mycile Guice Integration</h3>
+<a id="5-mycile-guice-integration" class="anchor" href="#5-mycile-guice-integration" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Mycile Guice Integration</h3>
 
 <p>When using the service discovery feature of <a href="http://mycila.github.io/guice/">Mycile Guice</a> (Google Guice extensions) JMX annoteated beans are automatically discovered and exported</p>
 
 <h3>
-<a name="6-tools" class="anchor" href="#6-tools"><span class="octicon octicon-link"></span></a>6. Tools</h3>
+<a id="6-tools" class="anchor" href="#6-tools" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. Tools</h3>
 
 <ul>
 <li>
 <a href="http://visualvm.java.net/">VisualVM</a>: Connects to a Java process and manage exported JMX classes</li>
 <li>
 <a href="http://mx4j.sourceforge.net/">MX4J</a>: Web interface yo manage JMX beans</li>
-</ul><p><a href="http://githalytics.com/mycila/jmx"><img src="https://cruel-carlota.pagodabox.com/85294c815bb3ce46bd79f4cf8d9bb341" alt="githalytics.com alpha" title="githalytics.com"></a></p>
-        </section>
+</ul>
 
-        <footer>
-          Mycila JMX is maintained by <a href="https://github.com/mycila">mycila</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+<p><a href="http://githalytics.com/mycila/jmx"><img src="https://cruel-carlota.pagodabox.com/ccb8ae70363afb2c06e4582434ceb163" alt="githalytics.com alpha" title="githalytics.com"></a></p>
 
-                  <script type="text/javascript">
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/mycila/jmx">Mycila JMX</a> is maintained by <a href="https://github.com/mycila">mycila</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -209,7 +211,6 @@ exporter.setEnsureUnique(true);
             } catch(err) {}
           </script>
 
-      </div>
-    </div>
   </body>
 </html>
+
